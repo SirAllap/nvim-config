@@ -1,0 +1,25 @@
+indent_type = "Spaces"      # Use "Tabs" if preferred
+indent_width = 2
+column_width = 120
+
+# Line up function parameters or arguments
+line_up_function_definitions = false
+line_up_function_call_args = false
+
+# Align the trailing comments on consecutive lines
+align_trailing_comments = true
+
+# Use single quotes for strings whenever possible
+quote_style = "AutoPreferSingle"
+
+# Configure how trailing commas are used
+trailing_comma = "Always"
+
+# Make sure all parentheses, brackets, and braces match the Rust style
+condense_wildcard_suffix = false
+
+# Insert a space after the parameters list's closing parenthesis in function calls
+call_parentheses = "Keep"
+
+# Remove any trailing white space
+trim_trailing_whitespace = true

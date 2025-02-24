@@ -1,88 +1,80 @@
+-- lua/plugins/lsp.lua
 return {
-    -- Mason and other tools setup
-    {
-        "williamboman/mason.nvim",
-        opts = function(_, opts)
-            vim.list_extend(opts.ensure_installed, {
-                "stylua", "selene", "luacheck", "shellcheck", "shfmt", "tailwindcss-language-server",
-                "typescript-language-server", "css-lsp"
-            })
-        end
-    },
-
-    -- LSP Servers Setup
-    {
-        "neovim/nvim-lspconfig",
-        opts = {
-            inlay_hints = { enabled = false },
-            servers = {
-                cssls = {},
-                tailwindcss = { root_dir = require("lspconfig.util").root_pattern(".git") },
-                tsserver = {
-                    root_dir = require("lspconfig.util").root_pattern(".git"),
-                    single_file_support = false,
-                    settings = {
-                        typescript = {
-                            inlayHints = { includeInlayParameterNameHints = "literal" }
-                        },
-                        javascript = {
-                            inlayHints = { includeInlayParameterNameHints = "all" }
-                        }
-                    }
-                },
-            },
-            setup = {}
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "black", "pyright", "ruff", "debugpy", "eslint_d",
+        "prettierd", "typescript-language-server", "biome"
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "off",
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                diagnosticSeverityOverrides = {
+                reportUnknownVariableType = "none", -- Disable this specific warning
+                reportUnknownMemberType = "none",   -- Disable other type-related warnings
+                reportMissingTypeStubs = "none",    -- Disable missing type stubs warnings
+              },
+              }
+            }
+          }
+        },
+        tsserver = {
+          settings = {
+            completions = {
+              completeFunctionCalls = true
+            }
+          }
         }
-    },
-
-    -- Setup Prettier with null-ls for formatting
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local null_ls = require("null-ls")
-
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.prettier.with({
-                        filetypes = { "javascript", "javascriptreact", "typescriptreact", "json", "css", "scss", "html" }
-                    }),
-                },
-            })
-
-            -- Auto-format on save
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = "*",
-                callback = function()
-                    vim.lsp.buf.format()
-                end,
-            })
+      },
+      setup = {
+        tsserver = function(_, opts)
+          require("lazyvim.util").lsp.on_attach(function(client, buffer)
+            if client.name == "tsserver" then
+              vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>",
+                { buffer = buffer, desc = "Organize Imports" })
+              vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>",
+                { desc = "Rename File", buffer = buffer })
+            end
+          end)
+          require("typescript").setup({ server = opts })
+          return true
         end
-    },
-
-    -- Additional LSP config (for keymaps and etc.)
-    {
-        "neovim/nvim-lspconfig",
-        opts = function()
-            local keys = require("lazyvim.plugins.lsp.keymaps").get()
-            vim.list_extend(keys, {
-                {
-                    "gd",
-                    function()
-                        require("telescope.builtin").lsp_definitions({ reuse_win = false })
-                    end,
-                    desc = "Goto Definition",
-                    has = "definition"
-                }
-            })
-        end
-    },
-
-    -- Keybinding for manual formatting (Ctrl + S)
-    {
-        config = function()
-            -- Manually trigger formatting on Ctrl + S
-            vim.api.nvim_set_keymap("n", "<C-s>", ":lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
-        end
+      }
     }
+  },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "LspAttach",
+    config = function()
+      require("lspsaga").setup({
+        symbol_in_winbar = { enable = false },
+        lightbulb = { enable = false },
+        outline = { keys = { toggle_or_jump = '<leader>cs' } },
+      })
+    end,
+    dependencies = { "nvim-tree/nvim-web-devicons" }
+  },
+  {
+  "jose-elias-alvarez/null-ls.nvim",
+  opts = function()
+    local null_ls = require("null-ls")
+    return {
+      sources = {
+        null_ls.builtins.formatting.black, -- Python formatting
+        null_ls.builtins.formatting.ruff,  -- Python linting and formatting
+      },
+    }
+  end,
+  }
 }

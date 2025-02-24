@@ -7,3 +7,21 @@ vim.opt.wrap = true
 vim.g.lazyvim_python_lsp = "pyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 vim.g.lazyvim_python_ruff = "ruff"
+
+-- Better scrolling
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+vim.opt.mouse = "a"
+
+-- Improved editing experience
+vim.opt.conceallevel = 2
+vim.opt.confirm = true
+vim.opt.spelloptions = "camel"
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.cursorline = true
+vim.opt.mouse = ""

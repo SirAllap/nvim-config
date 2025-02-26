@@ -30,6 +30,18 @@ return {{
                 goto_node = "<cr>",
                 show_help = "?"
             }
+        },
+
+        -- Enable italicized words in syntax highlighting
+        highlight = {
+            enable = true,
+            disable = {},
+            additional_vim_regex_highlighting = false,
+            -- Define custom captures for specific words like 'export'
+            custom_captures = {
+                -- Apply italics to the word 'export' in JavaScript or other languages
+                ["keyword.export"] = "italic, bold, guifg=#ff6347"  -- Example of italic + bold + color change
+            },
         }
     },
     config = function(_, opts)

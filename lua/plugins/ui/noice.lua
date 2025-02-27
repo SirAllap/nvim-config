@@ -93,7 +93,6 @@ return {
   -- filename
   {
     "b0o/incline.nvim",
-    -- dependencies = { "folke/tokyonight.nvim" },
     dependencies = { "scottmckendry/cyberdream.nvim" },
     event = "BufReadPre",
     priority = 1200,

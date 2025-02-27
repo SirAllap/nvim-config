@@ -40,84 +40,14 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.docker" },
 
-    -- 3. Custom plugins (your own plugins)
-    { import = "plugins.dashboard" }, -- Your custom dashboard
-    { import = "plugins" }, -- Other custom plugins
+    -- 3. Custom plugins (your own plugins organized in subdirectories)
+    -- Individual UI plugin imports:
+    { import = "plugins.ui" },
+    { import = "plugins.editing" },
+    { import = "plugins.coding" },
+    { import = "plugins.extras" },
 
     -- 4. Additional plugins (non-LazyVim plugins)
-    {
-      "folke/tokyonight.nvim",
-      priority = 1000, -- Ensure this loads first
-      init = function()
-        vim.cmd.colorscheme("tokyonight")
-      end,
-      config = function()
-        require("tokyonight").setup({
-          style = "storm",
-          transparent = true,
-          styles = {
-            sidebars = "transparent",
-            floats = "transparent",
-          },
-        })
-      end,
-    },
-    {
-      "folke/twilight.nvim",
-      opts = {},
-    },
-    {
-      "nvim-telescope/telescope.nvim",
-      tag = "0.1.8",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("telescope").setup({
-          defaults = {
-            prompt_prefix = " ",
-            selection_caret = " ",
-            mappings = {
-              i = {
-                ["<C-j>"] = require("telescope.actions").move_selection_next,
-                ["<C-k>"] = require("telescope.actions").move_selection_previous,
-              },
-            },
-          },
-        })
-      end,
-    },
-    {
-      "akinsho/toggleterm.nvim",
-      version = "*",
-      config = function()
-        require("toggleterm").setup({
-          size = function(term)
-            if term.direction == "horizontal" then
-              return 15
-            elseif term.direction == "vertical" then
-              return vim.o.columns * 0.4
-            end
-          end,
-          open_mapping = [[<c-\>]],
-        })
-      end,
-    },
-    {
-      "supermaven-inc/supermaven-nvim",
-      config = function()
-        require("supermaven-nvim").setup({
-          keymaps = {
-            accept_suggestion = "<C-e>",
-            clear_suggestion = "<C-]>",
-            accept_word = "<C-j>",
-          },
-          ignore_filetypes = { "cpp" },
-          color = {
-            suggestion_color = "#ff69b4",
-            cterm = 205,
-          },
-        })
-      end,
-    },
   },
   defaults = {
     lazy = false,
@@ -127,12 +57,10 @@ require("lazy").setup({
     enabled = true,
     notify = false,
   },
-  install = {
-    colorscheme = { "tokyonight" }, -- Ensure installation
-  },
   performance = {
     rtp = {
       disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
     },
   },
 })
+

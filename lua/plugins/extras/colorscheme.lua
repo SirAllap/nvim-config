@@ -1,31 +1,4 @@
 return {
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   priority = 1000, -- Ensure this loads first
-  --   init = function()
-  --     -- Set colorscheme early
-  --     vim.cmd.colorscheme("tokyonight")
-  --   end,
-  --   config = function()
-  --     require("tokyonight").setup({
-  --       style = "storm", -- storm, night, moon
-  --       transparent = true,
-  --       terminal_colors = true,
-  --       styles = {
-  --         comments = { italic = true }, -- Enable italic for comments
-  --         keywords = { italic = true },  -- Enable italic for keywords
-  --         strings = { italic = true },   -- Enable italic for strings
-  --         sidebars = "transparent",      -- Transparent sidebars
-  --         floats = "transparent",        -- Transparent floats
-  --       },
-  --       on_highlights = function(hl, c)
-  --         hl.TelescopeBorder = { fg = c.bg_highlight, bg = c.bg }
-  --         hl.TelescopePromptBorder = { fg = c.orange, bg = c.bg }
-  --       end,
-  --     })
-  --   end
-  -- },
-
   {
     "scottmckendry/cyberdream.nvim",
     lazy = false,

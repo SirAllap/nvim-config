@@ -2,7 +2,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-      -- "folke/tokyonight.nvim", -- Ensure tokyonight is a dependency
       "scottmckendry/cyberdream.nvim", -- Optional: for a more colorful theme
       "nvim-tree/nvim-web-devicons" -- Optional: for file icons support
     },

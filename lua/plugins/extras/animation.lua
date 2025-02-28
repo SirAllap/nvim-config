@@ -1,6 +1,9 @@
 return {
-  {
-    "echasnovski/mini.animate",
-    enabled = false, -- Disable the plugin
-  },
+  "echasnovski/mini.animate",
+  event = "VeryLazy",
+  opts = function(_, opts)
+    opts.scroll = {
+      enable = false
+    }
+  end
 }

@@ -14,7 +14,7 @@ vim.opt.spelloptions = "camel"           -- Treat camelCase as separate words fo
 -- Scrolling and Mouse
 vim.opt.scrolloff = 8                    -- Minimum number of lines to keep above/below the cursor
 vim.opt.sidescrolloff = 8                -- Minimum number of columns to keep at the sides of the cursor
-vim.opt.mouse = "a"                      -- Enable mouse support in all modes
+vim.opt.mouse = ""                       -- Enable mouse support in all modes
 
 -- Indentation and Tabs
 vim.opt.tabstop = 4                      -- Number of spaces a tab counts for

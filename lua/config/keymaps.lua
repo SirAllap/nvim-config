@@ -17,9 +17,6 @@ vim.keymap.set("n", "<Right>", "<NOP>", { silent = true })
 vim.keymap.set("n", "<Up>", "<NOP>", { silent = true })
 vim.keymap.set("n", "<Down>", "<NOP>", { silent = true })
 
--- Disable mouse
-vim.opt.mouse = "a"
-
 -- Double jj
 vim.keymap.set("i", "jj", "<ESC>")
 

@@ -20,3 +20,17 @@ vim.keymap.set("n", "<Down>", "<NOP>", { silent = true })
 -- Double jj
 vim.keymap.set("i", "jj", "<ESC>")
 
+-- Lazydocker
+vim.keymap.set("n", "<leader>k", "<cmd>LazyDocker<CR>", { desc = "Toggle LazyDocker", noremap = true, silent = true })
+
+-- LSP keybindings
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(event)
+    local buf = event.buf
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = buf, desc = "Go to Definition" })
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = buf, desc = "Find References" })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover Documentation" })
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = buf, desc = "Rename Symbol" })
+  end
+})
+

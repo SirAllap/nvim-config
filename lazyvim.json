@@ -1,6 +1,7 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.lang.markdown"
+    "lazyvim.plugins.extras.lang.markdown",
+    "plugins.extras.autosessions"
   ],
   "news": {
     "NEWS.md": "10960"

@@ -45,9 +45,26 @@ return {
         },
       })
 
+      -- horizontal_fused layout strategy
+      local layout_strategies = require("telescope.pickers.layout_strategies")
+      layout_strategies.horizontal_fused = function(picker, max_columns, max_lines, layout_config)
+          local layout = layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
+          layout.prompt.title = ""
+          layout.results.title = ""
+          layout.results.height = layout.results.height + 1
+          layout.results.borderchars = { "─", "│", "─", "│", "╭", "┬", "┤", "├" }
+          layout.prompt.borderchars = { "─", "│", "─", "│", "╭", "╮", "┴", "╰" }
+          if layout.preview then
+              layout.preview.title = ""
+              layout.preview.borderchars = { "─", "│", "─", " ", "─", "╮", "╯", "─" }
+          end
+          return layout
+      end
+
       -- Force transparency
       vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "#272727" })
       vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none" })
       vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none" })

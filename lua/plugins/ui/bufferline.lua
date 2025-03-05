@@ -5,14 +5,14 @@ return {
     keys = {
       { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
       { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
-      { "<S-w>", "<Cmd>BufferLinePickClose<CR>", desc = "Close buffer" },
+      { "<S-w>", "<Cmd>BufferLinePickClose<CR>", desc = "Pick and close buffer" },
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Pin buffer" },
       { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
+      { "<leader>bc", "<Cmd>bdelete!<CR>", desc = "Close current buffer" }, -- New key mapping
     },
     opts = {
       options = {
         mode = "buffers",
-        -- numbers = "ordinal",
         close_command = "bdelete! %d",
         right_mouse_command = "bdelete! %d",
         left_mouse_command = "buffer %d",
@@ -23,7 +23,7 @@ return {
         right_trunc_marker = "",
         show_buffer_close_icons = false,
         show_close_icon = false,
-        separator_style = "none", -- 🔥 Removes the triangles
+        separator_style = "NONE",
         enforce_regular_tabs = false,
         always_show_bufferline = true,
         diagnostics = "nvim_lsp",
@@ -41,16 +41,16 @@ return {
         },
       },
       highlights = {
-        fill = { bg = "NONE" }, -- Fully transparent background
-        background = { bg = "NONE", fg = "#888888" }, -- Inactive tabs
-        buffer_selected = { bg = "NONE", fg = "#ffffff", bold = true }, -- Focused tab
-        separator = { fg = "NONE", bg = "NONE" }, -- 🔥 No separators
-        separator_selected = { fg = "NONE", bg = "NONE" },
+        fill = { bg = "NONE" },
+        background = { bg = "NONE", fg = "#888888" },
+        buffer_selected = { bg = "NONE", fg = "#50fa7b", bold = true },
+        separator = { fg = "#44475a", bg = "NONE" },
+        separator_selected = { fg = "#50fa7b", bg = "NONE" }, -- Consistent with unselected tabs
         close_button = { fg = "#ff5555", bg = "NONE" },
         close_button_selected = { fg = "#ff5555", bg = "NONE" },
         modified = { fg = "#50fa7b", bg = "NONE" },
         modified_selected = { fg = "#50fa7b", bg = "NONE" },
-        indicator_selected = { fg = "#8be9fd", bg = "NONE" },
+        indicator_selected = { fg = "#50fa7b", bg = "NONE" },
       },
     },
   },
